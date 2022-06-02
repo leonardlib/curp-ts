@@ -22,16 +22,15 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
+          registry-url: 'https://registry.npmjs.org'
       - uses: actions/cache@v2
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - run: cp .npmrc.example .npmrc
-      - run: sed -i "s/__npm_registry_key__/$NPM_TOKEN/" .npmrc
         env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - run: npm ci
       - run: npm run build
       - run: git config user.name github-actions
