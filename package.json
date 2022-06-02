@@ -28,6 +28,14 @@
   },
   "name": "curp-ts",
   "author": "Leonardo Lira Becerra",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leonardlib/curp-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/leonardlib/curp-ts/issues"
+  },
+  "homepage": "https://github.com/leonardlib/curp-ts#readme",
   "module": "dist/curp-ts.esm.js",
   "size-limit": [
     {
