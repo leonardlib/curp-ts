@@ -1,0 +1,39 @@
+# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  publish:
+    name: Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: write
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+          registry-url: 'https://registry.npmjs.org'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - run: npm ci
+      - run: npm run build
+      - run: git config user.name github-actions
+      - run: git config user.email github-actions@github.com
+      - run: git config --global push.followTags true
+      - run: npm publish
