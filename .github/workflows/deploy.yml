@@ -32,8 +32,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - run: npm ci
+      - run: npm run lint
+      - run: npm run test
       - run: npm run build
-      - run: git config user.name github-actions
-      - run: git config user.email github-actions@github.com
-      - run: git config --global push.followTags true
       - run: npm publish
