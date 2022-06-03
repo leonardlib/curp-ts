@@ -1,4 +1,4 @@
-import { ESTADO, generar, GENERO, Persona, validar } from '../src';
+import { ESTADO, generar, GENERO, Persona, validar, GeneroType, EstadoType } from '../src';
 
 describe('curp', () => {
   it.each([
@@ -213,9 +213,9 @@ describe('curp', () => {
         nombre,
         apellidoPaterno,
         apellidoMaterno,
-        genero,
+        genero: genero as GeneroType,
         fechaNacimiento,
-        estado,
+        estado: estado as EstadoType,
       };
       expect(() => generar(persona)).toThrow(Error);
     },
