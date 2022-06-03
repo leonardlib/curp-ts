@@ -5,8 +5,8 @@ export type Persona = {
   nombre: string;
   apellidoPaterno: string;
   apellidoMaterno: string;
-  genero: string;
-  estado: string;
+  genero: GeneroType;
+  estado: EstadoType;
   fechaNacimiento: string;
 };
 
