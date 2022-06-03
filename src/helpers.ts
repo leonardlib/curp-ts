@@ -1,4 +1,13 @@
-import { Persona, comunes, malasPalabras, MalaPalabraKey } from './types';
+import {
+  Persona,
+  comunes,
+  malasPalabras,
+  MalaPalabraKey,
+  conTildes,
+  sinTildes,
+  ConTildesType,
+  compuestos,
+} from './types';
 
 export const validarDatos = (persona: Persona) => {
   if (!persona.nombre) {
@@ -31,101 +40,9 @@ export const zeropad = (ancho: number, num: number) => {
 };
 
 export const normalizaString = (str: string) => {
-  const origen = [
-    'Ã',
-    'À',
-    'Á',
-    'Ä',
-    'Â',
-    'È',
-    'É',
-    'Ë',
-    'Ê',
-    'Ì',
-    'Í',
-    'Ï',
-    'Î',
-    'Ò',
-    'Ó',
-    'Ö',
-    'Ô',
-    'Ù',
-    'Ú',
-    'Ü',
-    'Û',
-    'ã',
-    'à',
-    'á',
-    'ä',
-    'â',
-    'è',
-    'é',
-    'ë',
-    'ê',
-    'ì',
-    'í',
-    'ï',
-    'î',
-    'ò',
-    'ó',
-    'ö',
-    'ô',
-    'ù',
-    'ú',
-    'ü',
-    'û',
-    'Ç',
-    'ç',
-  ];
-  const destino = [
-    'A',
-    'A',
-    'A',
-    'A',
-    'A',
-    'E',
-    'E',
-    'E',
-    'E',
-    'I',
-    'I',
-    'I',
-    'I',
-    'O',
-    'O',
-    'O',
-    'O',
-    'U',
-    'U',
-    'U',
-    'U',
-    'a',
-    'a',
-    'a',
-    'a',
-    'a',
-    'e',
-    'e',
-    'e',
-    'e',
-    'i',
-    'i',
-    'i',
-    'i',
-    'o',
-    'o',
-    'o',
-    'o',
-    'u',
-    'u',
-    'u',
-    'u',
-    'c',
-    'c',
-  ];
   const salida = str.split('').map(char => {
-    const pos = origen.indexOf(char);
-    return pos > -1 ? destino[pos] : char;
+    const pos = conTildes.indexOf(char as ConTildesType);
+    return pos > -1 ? sinTildes[pos] : char;
   });
 
   return salida.join('');
@@ -145,28 +62,6 @@ export const obtenerNombreUsar = (nombre: string) => {
 };
 
 export const ajustaCompuesto = (str: string) => {
-  const compuestos = [
-    /\bDA\b/,
-    /\bDAS\b/,
-    /\bDE\b/,
-    /\bDEL\b/,
-    /\bDER\b/,
-    /\bDI\b/,
-    /\bDIE\b/,
-    /\bDD\b/,
-    /\bEL\b/,
-    /\bLA\b/,
-    /\bLOS\b/,
-    /\bLAS\b/,
-    /\bLE\b/,
-    /\bLES\b/,
-    /\bMAC\b/,
-    /\bMC\b/,
-    /\bVAN\b/,
-    /\bVON\b/,
-    /\bY\b/,
-  ];
-
   compuestos.forEach(compuesto => {
     if (compuesto.test(str)) {
       str = str.replace(compuesto, '');
