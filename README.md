@@ -1,3 +1,8 @@
+[![NPM Version](https://badge.fury.io/js/curp-ts.svg)](https://npmjs.org/package/curp-ts)
+![Build and test](https://github.com/leonardlib/curp-ts/actions/workflows/test.yml/badge.svg)
+![CodeQL](https://github.com/leonardlib/curp-ts/actions/workflows/codeql-analysis.yml/badge.svg)
+![Deploy](https://github.com/leonardlib/curp-ts/actions/workflows/deploy.yml/badge.svg)
+
 # curp-ts
 
 Genera y valida el CURP (Clave Única de Registro de Población) mexicano.
